@@ -1,0 +1,25 @@
+{
+  "name": "foody",
+  "version": "1.0.0",
+  "description": "recipe gathering and quick shopping list generation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RGniner6/foody.git"
+  },
+  "author": "Rahul Gururaj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RGniner6/foody/issues"
+  },
+  "homepage": "https://github.com/RGniner6/foody#readme",
+  "devDependencies": {
+    "webpack": "^4.41.5"
+  },
+  "dependencies": {
+    "jquery": "^3.4.1"
+  }
+}
