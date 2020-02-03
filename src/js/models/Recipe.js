@@ -32,7 +32,6 @@ export default class Recipe {
         const unitsLong = ['tablespoons', 'tablespoon', 'ounces', 'ounce', 'teaspoons', 'teaspoon', 'cups', 'cup', 'pounds', 'pound'];
         const unitShort = ['tbsp', 'tbsp', 'oz', 'oz', 'tsp', 'tsp', 'cup', 'cup', 'pound', 'pound'];
         const units = [...unitShort, 'kg', 'g'];
-        console.log(this.ingredients);
         const newIngredients = this.ingredients.map(el => {
             //Uniform units
             let ingredient = el.toLowerCase();
@@ -41,7 +40,9 @@ export default class Recipe {
             });
 
             //Remove parentheses
-            ingredient = ingredient.replace(/ *\([^)]*\) */g, "");
+            ingredient = ingredient.replace(/ *\([^)]*\)/g, "");
+            ingredient = ingredient.replace(/\s+/g,' ')
+                .replace(/^\s+|\s+$/,'');
 
             //parse ingredients into count, unit and ingredient
             const arrIng = ingredient.split(" ");
@@ -56,10 +57,10 @@ export default class Recipe {
                 let count;
                 if (arrCount.length === 1) {
                     count = eval(arrIng[0].replace('-','+'));
-                    // count = Math.round(count*10)/10;
+                    count = Math.round(count*10)/10;
                 } else {
                     count = eval(arrCount.join('+'))
-                    // count = Math.round(count*10)/10;
+                    count = Math.round(count*10)/10;
                 }
 
                 objIng = {
@@ -90,5 +91,19 @@ export default class Recipe {
             return objIng;
         });
         this.ingredients = newIngredients;
+    }
+
+    updateServings(type) {
+        //servings
+        const newServings = type === 'dec' ? this.servings - 1: this.servings + 1;
+        //ingredients
+        if (newServings > 0) {
+            this.ingredients.forEach(ing => {
+                ing.count *= (newServings/this.servings);
+            });
+
+            this.servings = newServings;
+        }
+
     }
 }

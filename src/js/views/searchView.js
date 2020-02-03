@@ -8,7 +8,7 @@ export const clearResults = () => {
 };
 const clearButtons = () => {elements.searchResPages.innerHTML = '';};
 
-const limitRecipeTitle = (title, limit = 17) => {
+export const limitRecipeTitle = (title, limit = 17) => {
   const newTitle = [];
   if (title.length > 17){
       title.split(' ').reduce((acc, cur) => {
@@ -24,7 +24,9 @@ const limitRecipeTitle = (title, limit = 17) => {
 };
 
 export const highlightSelected = id => {
-    document.querySelector(`a[href="#${id}"]`).classList.add('results__link--active');
+    const highlighedResults = Array.from(document.querySelectorAll('.results__link--active'));
+    highlighedResults.forEach(el => el.classList.remove('results__link--active'));
+    document.querySelector(`.results__link[href="#${id}"]`).classList.add('results__link--active');
 };
 
 const renderRecipe = (recipe) => {
